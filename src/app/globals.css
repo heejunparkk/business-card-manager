@@ -3,6 +3,27 @@
 :root {
   --background: #ffffff;
   --foreground: #171717;
+  --card-bg: #ffffff;
+  --input-bg: #f9fafb;
+  --header-bg: #ffffff;
+  --footer-bg: #ffffff;
+  --button-primary: linear-gradient(to right, #2563eb, #4f46e5);
+  --button-primary-hover: linear-gradient(to right, #1d4ed8, #4338ca);
+  --border-color: #e5e7eb;
+  --shadow-color: rgba(0, 0, 0, 0.1);
+}
+
+.dark {
+  --background: #111827;
+  --foreground: #f3f4f6;
+  --card-bg: #1f2937;
+  --input-bg: #374151;
+  --header-bg: #1f2937;
+  --footer-bg: #1f2937;
+  --button-primary: linear-gradient(to right, #3b82f6, #6366f1);
+  --button-primary-hover: linear-gradient(to right, #2563eb, #4f46e5);
+  --border-color: #374151;
+  --shadow-color: rgba(0, 0, 0, 0.3);
 }
 
 @theme inline {
@@ -12,15 +33,41 @@
   --font-mono: var(--font-geist-mono);
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
-}
-
 body {
   background: var(--background);
   color: var(--foreground);
   font-family: Arial, Helvetica, sans-serif;
+}
+
+/* 다크모드에서 색상 선택기 가시성 향상 */
+.dark input[type="color"] {
+  background-color: #374151;
+  border-color: #4b5563;
+}
+
+/* 테마 변경 시 부드러운 전환 애니메이션 */
+.theme-transition,
+.theme-transition *,
+.theme-transition *:before,
+.theme-transition *:after {
+  transition: all 0.3s ease-in-out !important;
+  transition-delay: 0s !important;
+}
+
+/* 다크모드에서 스크롤바 스타일링 */
+.dark ::-webkit-scrollbar {
+  width: 12px;
+}
+
+.dark ::-webkit-scrollbar-track {
+  background: #1f2937;
+}
+
+.dark ::-webkit-scrollbar-thumb {
+  background: #4b5563;
+  border-radius: 6px;
+}
+
+.dark ::-webkit-scrollbar-thumb:hover {
+  background: #6b7280;
 }
