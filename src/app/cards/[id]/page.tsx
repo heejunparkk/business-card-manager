@@ -7,6 +7,7 @@ import { BusinessCard, CardFormData } from "@/interfaces/card";
 import { getCardById, deleteCard, updateCard } from "@/lib/cardData";
 import CardForm from "@/components/CardForm";
 import { FaEdit, FaTrash, FaArrowLeft, FaAddressCard } from "react-icons/fa";
+import styles from "./cardDetail.module.css";
 
 interface Props {
   params: {
@@ -60,6 +61,20 @@ export default function CardDetail({ params }: Props) {
     }
     setIsEditing(false);
   };
+
+  // 카드 배경색과 텍스트 색상을 CSS 변수로 설정
+  useEffect(() => {
+    if (card) {
+      document.documentElement.style.setProperty(
+        "--card-bg",
+        card.backgroundColor || "#ffffff",
+      );
+      document.documentElement.style.setProperty(
+        "--card-text",
+        card.textColor || "#000000",
+      );
+    }
+  }, [card]);
   if (isLoading) {
     return (
       <div className="min-h-screen flex items-center justify-center">
@@ -91,11 +106,7 @@ export default function CardDetail({ params }: Props) {
           </p>
           <button
             onClick={() => router.push("/")}
-            className="px-6 py-2 text-white rounded-full shadow-md hover:shadow-lg transition-all duration-300"
-            style={{
-              background: "var(--button-primary)",
-              boxShadow: "0 4px 6px -1px var(--shadow-color)",
-            }}
+            className={`px-6 py-2 text-white rounded-full shadow-md hover:shadow-lg transition-all duration-300 ${styles.buttonPrimary}`}
           >
             홈으로 돌아가기
           </button>
@@ -103,13 +114,6 @@ export default function CardDetail({ params }: Props) {
       </div>
     );
   }
-  const cardStyle = {
-    backgroundColor: card.backgroundColor || "#ffffff",
-    color: card.textColor || "#000000",
-    boxShadow: document.documentElement.classList.contains("dark")
-      ? "0 10px 15px -3px var(--shadow-color), 0 4px 6px -4px var(--shadow-color)"
-      : "",
-  };
   return (
     <div className="p-6">
       <div className="max-w-4xl mx-auto">
@@ -131,7 +135,13 @@ export default function CardDetail({ params }: Props) {
           </div>
         ) : (
           <div className="bg-white dark:bg-gray-800 rounded-xl shadow-xl overflow-hidden border border-gray-100 dark:border-gray-700">
-            <div className="p-8" style={cardStyle}>
+            <div
+              className={`p-8 ${styles.cardContainer} ${
+                document.documentElement.classList.contains("dark")
+                  ? styles.cardDarkShadow
+                  : ""
+              }`}
+            >
               <div className="flex justify-between items-start mb-8">
                 <div>
                   <h1 className="text-4xl font-bold mb-1">{card.name}</h1>
@@ -161,10 +171,9 @@ export default function CardDetail({ params }: Props) {
                       src={card.logo}
                       alt={`${card.companyName} 로고`}
                       fill
-                      style={{ objectFit: "contain" }}
                       sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
                       unoptimized
-                      className="drop-shadow-sm"
+                      className={`drop-shadow-sm ${styles.cardImage}`}
                     />
                   </div>
                 </div>

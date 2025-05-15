@@ -1,0 +1,20 @@
+/* 카드 디테일 페이지 스타일 */
+.cardContainer {
+  background-color: var(--card-bg, #ffffff);
+  color: var(--card-text, #000000);
+}
+
+.cardDarkShadow {
+  box-shadow:
+    0 10px 15px -3px var(--shadow-color),
+    0 4px 6px -4px var(--shadow-color);
+}
+
+.buttonPrimary {
+  background: var(--button-primary);
+  box-shadow: 0 4px 6px -1px var(--shadow-color);
+}
+
+.cardImage {
+  object-fit: contain;
+}

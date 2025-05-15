@@ -1,10 +1,11 @@
-"use client";
+'use client';
 
-import { BusinessCard } from "@/interfaces/card";
-import { FC } from "react";
-import { FaEdit, FaTrash, FaEye } from "react-icons/fa";
-import Link from "next/link";
-import Image from "next/image";
+import { BusinessCard } from '@/interfaces/card';
+import { FC, useEffect, useRef } from 'react';
+import { FaEdit, FaTrash, FaEye } from 'react-icons/fa';
+import Link from 'next/link';
+import Image from 'next/image';
+import styles from './Card.module.css';
 
 interface CardProps {
   card: BusinessCard;
@@ -13,21 +14,25 @@ interface CardProps {
 }
 
 const Card: FC<CardProps> = ({ card, onEdit, onDelete }) => {
-  const cardStyle = {
-    backgroundColor: card.backgroundColor || "#ffffff",
-    color: card.textColor || "#000000",
-    boxShadow: document.documentElement.classList.contains("dark")
-      ? "0 10px 15px -3px var(--shadow-color), 0 4px 6px -4px var(--shadow-color)"
-      : "",
-  };
+  const cardRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    if (cardRef.current) {
+      // 카드 배경색과 텍스트 색상을 직접 요소에 설정
+      cardRef.current.style.setProperty('--card-bg-color', card.backgroundColor || '#ffffff');
+      cardRef.current.style.setProperty('--card-text-color', card.textColor || '#000000');
+    }
+  }, [card.backgroundColor, card.textColor]);
+
   return (
     <div
-      className="rounded-xl overflow-hidden shadow-lg hover:shadow-xl transform hover:-translate-y-1 transition-all duration-300 dark:ring-1 dark:ring-gray-700"
-      style={cardStyle}
+      ref={cardRef}
+      className={`transform overflow-hidden rounded-xl shadow-lg transition-all duration-300 hover:-translate-y-1 hover:shadow-xl dark:ring-1 dark:ring-gray-700 ${
+        styles.cardContainer
+      } ${document.documentElement.classList.contains('dark') ? styles.cardDarkShadow : ''}`}
     >
-      {" "}
       <div
-        className="p-6 cursor-pointer"
+        className="cursor-pointer p-6"
         onClick={() => (window.location.href = `/cards/${card.id}`)}
       >
         {card.logo && (
@@ -37,56 +42,55 @@ const Card: FC<CardProps> = ({ card, onEdit, onDelete }) => {
                 src={card.logo}
                 alt={`${card.companyName} 로고`}
                 fill
-                style={{ objectFit: "contain" }}
                 sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
                 unoptimized
-                className="drop-shadow-sm"
+                className={`drop-shadow-sm ${styles.cardImage}`}
               />
             </div>
           </div>
         )}
 
-        <div className="mb-5 border-b border-gray-200 dark:border-gray-700 pb-3">
+        <div className="mb-5 border-b border-gray-200 pb-3 dark:border-gray-700">
           <h2 className="text-xl font-bold">{card.name}</h2>
           <p className="text-sm opacity-90">{card.title}</p>
-          <p className="text-sm font-medium mt-1">{card.companyName}</p>
+          <p className="mt-1 text-sm font-medium">{card.companyName}</p>
         </div>
 
-        <div className="text-sm space-y-2">
+        <div className="space-y-2 text-sm">
           <p className="flex items-center">
-            <span className="inline-block w-4 mr-2 opacity-70">📱</span>
+            <span className="mr-2 inline-block w-4 opacity-70">📱</span>
             {card.phone}
           </p>
           <p className="flex items-center overflow-hidden text-ellipsis">
-            <span className="inline-block w-4 mr-2 opacity-70">✉️</span>
+            <span className="mr-2 inline-block w-4 opacity-70">✉️</span>
             {card.email}
           </p>
           {card.address && (
             <p className="flex items-center">
-              <span className="inline-block w-4 mr-2 opacity-70">🏢</span>
+              <span className="mr-2 inline-block w-4 opacity-70">🏢</span>
               {card.address}
             </p>
           )}
           {card.website && (
             <p className="flex items-center overflow-hidden text-ellipsis">
-              <span className="inline-block w-4 mr-2 opacity-70">🌐</span>{" "}
+              <span className="mr-2 inline-block w-4 opacity-70">🌐</span>{' '}
               <span
-                className="text-blue-600 dark:text-blue-400 hover:underline truncate cursor-pointer"
+                className="cursor-pointer truncate text-blue-600 hover:underline dark:text-blue-400"
                 onClick={(e) => {
                   e.stopPropagation();
-                  window.open(card.website, "_blank", "noopener,noreferrer");
+                  window.open(card.website, '_blank', 'noopener,noreferrer');
                 }}
               >
-                {card.website.replace(/(^\w+:|^)\/\//, "")}
+                {card.website.replace(/(^\w+:|^)\/\//, '')}
               </span>
             </p>
           )}
         </div>
       </div>
-      <div className="bg-opacity-10 bg-black dark:bg-opacity-30 backdrop-blur-sm p-3 flex justify-end space-x-3">
+      <div className="bg-opacity-10 dark:bg-opacity-30 flex justify-end space-x-3 bg-black p-3 backdrop-blur-sm">
         <Link
           href={`/cards/${card.id}`}
-          className="w-8 h-8 flex items-center justify-center rounded-full bg-green-50 dark:bg-green-900 text-green-600 dark:text-green-400 hover:bg-green-100 dark:hover:bg-green-800 transition-colors"
+          className="flex h-8 w-8 items-center justify-center rounded-full bg-green-50 text-green-600 transition-colors hover:bg-green-100 dark:bg-green-900 dark:text-green-400 dark:hover:bg-green-800"
           aria-label="명함 상세보기"
         >
           <FaEye />
@@ -96,7 +100,7 @@ const Card: FC<CardProps> = ({ card, onEdit, onDelete }) => {
             e.stopPropagation();
             onEdit(card.id);
           }}
-          className="w-8 h-8 flex items-center justify-center rounded-full bg-blue-50 dark:bg-blue-900 text-blue-600 dark:text-blue-400 hover:bg-blue-100 dark:hover:bg-blue-800 transition-colors"
+          className="flex h-8 w-8 items-center justify-center rounded-full bg-blue-50 text-blue-600 transition-colors hover:bg-blue-100 dark:bg-blue-900 dark:text-blue-400 dark:hover:bg-blue-800"
           aria-label="명함 편집"
         >
           <FaEdit />
@@ -106,7 +110,7 @@ const Card: FC<CardProps> = ({ card, onEdit, onDelete }) => {
             e.stopPropagation();
             onDelete(card.id);
           }}
-          className="w-8 h-8 flex items-center justify-center rounded-full bg-red-50 dark:bg-red-900 text-red-600 dark:text-red-400 hover:bg-red-100 dark:hover:bg-red-800 transition-colors"
+          className="flex h-8 w-8 items-center justify-center rounded-full bg-red-50 text-red-600 transition-colors hover:bg-red-100 dark:bg-red-900 dark:text-red-400 dark:hover:bg-red-800"
           aria-label="명함 삭제"
         >
           <FaTrash />

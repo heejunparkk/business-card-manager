@@ -61,7 +61,7 @@ export const getCards = (): BusinessCard[] => {
 
 // 카드 추가
 export const addCard = (
-  card: Omit<BusinessCard, "id" | "createdAt" | "updatedAt">
+  card: Omit<BusinessCard, "id" | "createdAt" | "updatedAt">,
 ): BusinessCard => {
   const newCard: BusinessCard = {
     ...card,
@@ -80,7 +80,7 @@ export const addCard = (
 // 카드 수정
 export const updateCard = (
   id: string,
-  card: Partial<BusinessCard>
+  card: Partial<BusinessCard>,
 ): BusinessCard | null => {
   const cards = getCards();
   const cardIndex = cards.findIndex((c) => c.id === id);

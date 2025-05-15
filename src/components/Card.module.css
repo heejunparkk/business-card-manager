@@ -1,0 +1,15 @@
+/* 카드 컴포넌트 스타일 */
+.cardContainer {
+  background-color: var(--card-bg-color);
+  color: var(--card-text-color);
+}
+
+.cardDarkShadow {
+  box-shadow:
+    0 10px 15px -3px var(--shadow-color),
+    0 4px 6px -4px var(--shadow-color);
+}
+
+.cardImage {
+  object-fit: contain;
+}

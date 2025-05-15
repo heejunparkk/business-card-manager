@@ -14,7 +14,7 @@ export default function Home() {
   const [filteredCards, setFilteredCards] = useState<BusinessCard[]>([]);
   const [showForm, setShowForm] = useState(false);
   const [editingCard, setEditingCard] = useState<BusinessCard | undefined>(
-    undefined
+    undefined,
   );
   const [isEditing, setIsEditing] = useState(false);
   const [searchTerm, setSearchTerm] = useState("");
@@ -45,7 +45,7 @@ export default function Home() {
             card.companyName.toLowerCase().includes(lowercasedSearch) ||
             card.title.toLowerCase().includes(lowercasedSearch) ||
             card.email.toLowerCase().includes(lowercasedSearch) ||
-            (card.phone && card.phone.includes(searchTerm))
+            (card.phone && card.phone.includes(searchTerm)),
         );
       }
 
@@ -84,7 +84,7 @@ export default function Home() {
     const updated = updateCard(editingCard.id, data);
     if (updated) {
       setCards((prevCards) =>
-        prevCards.map((card) => (card.id === editingCard.id ? updated : card))
+        prevCards.map((card) => (card.id === editingCard.id ? updated : card)),
       );
     }
 
