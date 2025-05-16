@@ -1,0 +1,10 @@
+/* 메인 페이지 스타일 */
+.primaryButton {
+  background: var(--button-primary);
+  box-shadow: 0 4px 6px -1px var(--shadow-color);
+}
+
+.amberButton {
+  background: linear-gradient(to right, #f59e0b, #d97706);
+  box-shadow: 0 4px 6px -1px var(--shadow-color);
+}

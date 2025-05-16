@@ -1,0 +1,5 @@
+/* 카드 폼 컴포넌트 스타일 */
+.submitButton {
+  background: var(--button-primary);
+  box-shadow: 0 4px 6px -1px var(--shadow-color);
+}
