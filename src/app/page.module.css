@@ -26,6 +26,12 @@
   box-shadow: 0 2px 4px var(--shadow-color);
 }
 
+:global(.dark) .activeSort {
+  background: var(--button-primary);
+  color: white;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.4);
+}
+
 .inactiveSort {
   background-color: #f3f4f6;
   color: #4b5563;
@@ -35,11 +41,11 @@
   background-color: #e5e7eb;
 }
 
-.dark .inactiveSort {
+:global(.dark) .inactiveSort {
   background-color: #374151;
   color: #d1d5db;
 }
 
-.dark .inactiveSort:hover {
+:global(.dark) .inactiveSort:hover {
   background-color: #4b5563;
 }
