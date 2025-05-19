@@ -1,0 +1,4 @@
+/* 헤더 스타일 */
+.headerBg {
+  background-color: var(--header-bg);
+}

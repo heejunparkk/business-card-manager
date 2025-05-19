@@ -115,7 +115,7 @@ export default function Home() {
         <div className="mb-8 flex flex-col items-center justify-between gap-6 sm:flex-row">
           <div>
             <h1 className="bg-gradient-to-r from-blue-700 to-indigo-700 bg-clip-text text-4xl font-bold text-transparent">
-              내 명함 관리
+              Business Cards
             </h1>
             <p className="mt-2 text-gray-500 dark:text-gray-400">
               {cards.length > 0

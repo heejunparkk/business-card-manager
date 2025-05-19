@@ -1,0 +1,4 @@
+/* 푸터 스타일 */
+.footerBg {
+  background-color: var(--footer-bg);
+}
