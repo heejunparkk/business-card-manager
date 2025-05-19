@@ -142,20 +142,18 @@ export default function Home() {
               value={searchTerm}
               onChange={(e) => setSearchTerm(e.target.value)}
               placeholder="이름, 회사, 직함, 이메일, 연락처로 검색..."
-              className="w-full rounded-xl border-none bg-white p-4 pl-12 shadow-md focus:ring-2 focus:ring-blue-500 focus:outline-none dark:bg-gray-800 dark:text-white dark:placeholder-gray-400"
+              className={`w-full rounded-xl border-none p-4 pl-12 shadow-md focus:ring-2 focus:ring-blue-500 focus:outline-none dark:placeholder-gray-400 ${styles.searchInput}`}
             />
             <FaSearch className="absolute top-1/2 left-4 -translate-y-1/2 transform text-lg text-gray-400" />
           </div>
 
-          <div className="flex flex-wrap gap-3 rounded-xl bg-white p-3 shadow-sm dark:bg-gray-800 dark:shadow-gray-900/10">
+          <div className={`flex flex-wrap gap-3 rounded-xl p-3 shadow-sm ${styles.sortContainer}`}>
             <span className="self-center text-sm font-medium text-gray-600 dark:text-gray-400">
               정렬:
             </span>
             <button
               className={`rounded-full px-4 py-2 text-sm font-medium transition-all duration-200 ${
-                sortBy === 'date'
-                  ? 'bg-gradient-to-r from-blue-600 to-indigo-600 text-white shadow-md'
-                  : 'bg-gray-100 text-gray-700 hover:bg-gray-200 dark:bg-gray-700 dark:text-gray-300 dark:hover:bg-gray-600'
+                sortBy === 'date' ? styles.activeSort : styles.inactiveSort
               }`}
               onClick={() => setSortBy('date')}
             >
@@ -163,9 +161,7 @@ export default function Home() {
             </button>
             <button
               className={`rounded-full px-4 py-2 text-sm font-medium transition-all duration-200 ${
-                sortBy === 'name'
-                  ? 'bg-gradient-to-r from-blue-600 to-indigo-600 text-white shadow-md'
-                  : 'bg-gray-100 text-gray-700 hover:bg-gray-200 dark:bg-gray-700 dark:text-gray-300 dark:hover:bg-gray-600'
+                sortBy === 'name' ? styles.activeSort : styles.inactiveSort
               }`}
               onClick={() => setSortBy('name')}
             >
@@ -173,9 +169,7 @@ export default function Home() {
             </button>
             <button
               className={`rounded-full px-4 py-2 text-sm font-medium transition-all duration-200 ${
-                sortBy === 'companyName'
-                  ? 'bg-gradient-to-r from-blue-600 to-indigo-600 text-white shadow-md'
-                  : 'bg-gray-100 text-gray-700 hover:bg-gray-200 dark:bg-gray-700 dark:text-gray-300 dark:hover:bg-gray-600'
+                sortBy === 'companyName' ? styles.activeSort : styles.inactiveSort
               }`}
               onClick={() => setSortBy('companyName')}
             >

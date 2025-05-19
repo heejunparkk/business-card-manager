@@ -8,3 +8,38 @@
   background: linear-gradient(to right, #f59e0b, #d97706);
   box-shadow: 0 4px 6px -1px var(--shadow-color);
 }
+
+.searchInput {
+  background-color: var(--card-bg);
+  color: var(--foreground);
+}
+
+.sortContainer {
+  background-color: var(--card-bg);
+  color: var(--foreground);
+  box-shadow: 0 1px 3px var(--shadow-color);
+}
+
+.activeSort {
+  background: var(--button-primary);
+  color: white;
+  box-shadow: 0 2px 4px var(--shadow-color);
+}
+
+.inactiveSort {
+  background-color: #f3f4f6;
+  color: #4b5563;
+}
+
+.inactiveSort:hover {
+  background-color: #e5e7eb;
+}
+
+.dark .inactiveSort {
+  background-color: #374151;
+  color: #d1d5db;
+}
+
+.dark .inactiveSort:hover {
+  background-color: #4b5563;
+}
