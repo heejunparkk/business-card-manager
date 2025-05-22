@@ -1,7 +1,8 @@
 'use client';
 
-import { BusinessCard, CardFormData } from '@/interfaces/card';
+import { BusinessCard, CardFormData, CARD_TEMPLATES, CardTemplate } from '@/interfaces/card';
 import { FC, useState, useEffect } from 'react';
+import { FaCheck } from 'react-icons/fa';
 import styles from './CardForm.module.css';
 
 interface CardFormProps {
@@ -23,6 +24,7 @@ const CardForm: FC<CardFormProps> = ({ onSubmit, onCancel, initialData, title })
     logo: '',
     backgroundColor: '#ffffff',
     textColor: '#000000',
+    templateId: 'classic-white',
   });
 
   useEffect(() => {
@@ -38,6 +40,7 @@ const CardForm: FC<CardFormProps> = ({ onSubmit, onCancel, initialData, title })
         logo: initialData.logo || '',
         backgroundColor: initialData.backgroundColor || '#ffffff',
         textColor: initialData.textColor || '#000000',
+        templateId: initialData.templateId || 'classic-white',
       });
     }
   }, [initialData]);
@@ -47,6 +50,16 @@ const CardForm: FC<CardFormProps> = ({ onSubmit, onCancel, initialData, title })
     setFormData((prevState) => ({
       ...prevState,
       [name]: value,
+    }));
+  };
+
+  // 템플릿 선택 처리
+  const handleTemplateSelect = (template: CardTemplate) => {
+    setFormData((prevState) => ({
+      ...prevState,
+      backgroundColor: template.backgroundColor,
+      textColor: template.textColor,
+      templateId: template.id,
     }));
   };
 
@@ -189,6 +202,64 @@ const CardForm: FC<CardFormProps> = ({ onSubmit, onCancel, initialData, title })
             placeholder="https://example.com/logo.png"
           />
         </div>
+        {/* 템플릿 선택 섹션 추가 */}
+        <div className={styles.templateSection}>
+          <label className="mb-2 block text-sm font-medium text-gray-700 dark:text-gray-300">
+            디자인 템플릿 선택
+          </label>
+          <div className={styles.templateGrid}>
+            {CARD_TEMPLATES.map((template) => (
+              <div
+                key={template.id}
+                onClick={() => handleTemplateSelect(template)}
+                className={`${styles.templateCard} ${styles.templateItemContainer} ${
+                  formData.templateId === template.id
+                    ? styles.templateCardSelected
+                    : styles.templateCardUnselected
+                }`}
+              >
+                <div className={styles.templatePreview} data-template-id={template.id}>
+                  <div className={styles.templatePreviewContent} data-template-id={template.id}>
+                    {template.name}
+                  </div>
+                </div>
+                <div className={styles.templateDescription}>{template.description}</div>
+                {formData.templateId === template.id && (
+                  <div className={styles.selectedIndicator}>
+                    <FaCheck size={10} />
+                  </div>
+                )}
+              </div>
+            ))}
+          </div>
+
+          {/* 선택된 템플릿 미리보기 */}
+          <div className={styles.previewSection}>
+            <div className={styles.previewTitle}>
+              <span>선택한 템플릿 미리보기</span>
+            </div>
+            <div
+              className={styles.previewCard}
+              data-preview="true"
+              style={{
+                backgroundColor: formData.backgroundColor || '#ffffff',
+                color: formData.textColor || '#000000',
+              }}
+            >
+              <div className={styles.previewHeader}>
+                <div className={styles.previewName}>{formData.name || '홍길동'}</div>
+                <div className={styles.previewJobTitle}>{formData.title || '직함'}</div>
+                <div className={styles.previewCompany}>{formData.companyName || '회사명'}</div>
+              </div>
+              <div className={styles.previewInfo}>
+                <div>📱 {formData.phone || '010-0000-0000'}</div>
+                <div>✉️ {formData.email || 'email@example.com'}</div>
+                {formData.website && <div>🌐 {formData.website}</div>}
+                {formData.address && <div>🏢 {formData.address}</div>}
+              </div>
+            </div>
+          </div>
+        </div>
         <div className="mb-6 grid grid-cols-1 gap-5 md:grid-cols-2">
           <div>
             {' '}
@@ -196,15 +267,17 @@ const CardForm: FC<CardFormProps> = ({ onSubmit, onCancel, initialData, title })
               배경색
             </label>
             <div className="flex items-center gap-3">
-              <input
-                type="color"
-                name="backgroundColor"
-                value={formData.backgroundColor}
-                onChange={handleChange}
-                title="배경색 선택"
-                aria-label="배경색 선택"
-                className="h-12 w-12 cursor-pointer overflow-hidden rounded-lg border-none"
-              />
+              <div className="h-12 w-12 cursor-pointer overflow-hidden rounded-lg border-none">
+                <input
+                  type="color"
+                  name="backgroundColor"
+                  value={formData.backgroundColor}
+                  onChange={handleChange}
+                  title="배경색 선택"
+                  aria-label="배경색 선택"
+                  className="h-full w-full cursor-pointer"
+                />
+              </div>
               <input
                 type="text"
                 name="backgroundColor"
@@ -223,15 +296,17 @@ const CardForm: FC<CardFormProps> = ({ onSubmit, onCancel, initialData, title })
               글자색
             </label>
             <div className="flex items-center gap-3">
-              <input
-                type="color"
-                name="textColor"
-                value={formData.textColor}
-                onChange={handleChange}
-                title="텍스트 색상 선택"
-                aria-label="텍스트 색상 선택"
-                className="h-12 w-12 cursor-pointer overflow-hidden rounded-lg border-none"
-              />
+              <div className="h-12 w-12 cursor-pointer overflow-hidden rounded-lg border-none">
+                <input
+                  type="color"
+                  name="textColor"
+                  value={formData.textColor}
+                  onChange={handleChange}
+                  title="텍스트 색상 선택"
+                  aria-label="텍스트 색상 선택"
+                  className="h-full w-full cursor-pointer"
+                />
+              </div>
               <input
                 type="text"
                 name="textColor"

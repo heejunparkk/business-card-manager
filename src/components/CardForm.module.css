@@ -3,3 +3,204 @@
   background: var(--button-primary);
   box-shadow: 0 4px 6px -1px var(--shadow-color);
 }
+
+/* 템플릿 선택 관련 스타일 */
+.templateSection {
+  margin-bottom: 1.5rem;
+}
+
+.templateGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(8rem, 1fr));
+  gap: 0.75rem;
+  margin-bottom: 1.5rem;
+}
+
+.templateCard {
+  position: relative;
+  cursor: pointer;
+  border-radius: 0.5rem;
+  border-width: 2px;
+  padding: 0.5rem;
+  transition-property: all;
+  transition-duration: 200ms;
+}
+
+.templateCard:hover {
+  box-shadow:
+    0 10px 15px -3px rgba(0, 0, 0, 0.1),
+    0 4px 6px -2px rgba(0, 0, 0, 0.05);
+}
+
+.templateCardSelected {
+  border-color: rgb(59, 130, 246);
+  --tw-ring-offset-shadow: var(--tw-ring-inset) 0 0 0 var(--tw-ring-offset-width)
+    var(--tw-ring-offset-color);
+  --tw-ring-shadow: var(--tw-ring-inset) 0 0 0 calc(2px + var(--tw-ring-offset-width))
+    var(--tw-ring-color);
+  box-shadow: var(--tw-ring-offset-shadow), var(--tw-ring-shadow), var(--tw-shadow, 0 0 #0000);
+  --tw-ring-color: rgb(147, 197, 253);
+}
+
+.templateCardUnselected {
+  border-color: rgb(229, 231, 235);
+}
+
+:global(.dark) .templateCardUnselected {
+  border-color: rgb(75, 85, 99);
+}
+
+.templatePreview {
+  margin-bottom: 0.5rem;
+  height: 4rem;
+  width: 100%;
+  border-radius: 0.375rem;
+  border: 1px solid rgba(0, 0, 0, 0.1);
+}
+
+.templatePreviewContent {
+  display: flex;
+  height: 100%;
+  width: 100%;
+  align-items: center;
+  justify-content: center;
+  padding: 0.5rem;
+  text-align: center;
+  font-size: 0.875rem;
+  font-weight: 500;
+}
+
+.templateDescription {
+  font-size: 0.75rem;
+  color: rgb(75, 85, 99);
+}
+
+:global(.dark) .templateDescription {
+  color: rgb(156, 163, 175);
+}
+
+.selectedIndicator {
+  position: absolute;
+  right: 0.5rem;
+  top: 0.5rem;
+  border-radius: 9999px;
+  background-color: rgb(59, 130, 246);
+  padding: 0.25rem;
+  color: white;
+}
+
+/* 템플릿 미리보기 관련 스타일 */
+.previewSection {
+  margin-top: 1.5rem;
+  padding: 1rem;
+  border-radius: 0.5rem;
+  border: 1px dashed #cbd5e1;
+  background-color: rgba(241, 245, 249, 0.5);
+}
+
+:global(.dark) .previewSection {
+  border-color: #475569;
+  background-color: rgba(30, 41, 59, 0.5);
+}
+
+.previewTitle {
+  font-size: 0.875rem;
+  font-weight: 500;
+  color: #64748b;
+  margin-bottom: 0.5rem;
+  display: flex;
+  align-items: center;
+}
+
+:global(.dark) .previewTitle {
+  color: #94a3b8;
+}
+
+.previewCard {
+  border-radius: 0.5rem;
+  padding: 1rem;
+  box-shadow:
+    0 4px 6px -1px rgba(0, 0, 0, 0.1),
+    0 2px 4px -1px rgba(0, 0, 0, 0.06);
+}
+
+.previewHeader {
+  margin-bottom: 0.75rem;
+  padding-bottom: 0.5rem;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+}
+
+.previewName {
+  font-size: 1rem;
+  font-weight: 600;
+  margin-bottom: 0.25rem;
+}
+
+.previewJobTitle {
+  font-size: 0.75rem;
+  opacity: 0.9;
+}
+
+.previewCompany {
+  font-size: 0.875rem;
+  font-weight: 500;
+  margin-bottom: 0.5rem;
+}
+
+.previewInfo {
+  font-size: 0.75rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+}
+
+/* 동적 색상 적용을 위한 클래스 */
+.templateColorApplied {
+  /* 기본 스타일링 */
+  transition:
+    background-color 0.3s ease,
+    color 0.3s ease;
+}
+
+/* 각 템플릿 아이템의 컨테이너 스타일링 */
+.templateItemContainer .templatePreview[data-template-id='classic-white'] {
+  background-color: #ffffff;
+}
+.templateItemContainer .templatePreviewContent[data-template-id='classic-white'] {
+  color: #000000;
+}
+
+.templateItemContainer .templatePreview[data-template-id='modern-dark'] {
+  background-color: #1f2937;
+}
+.templateItemContainer .templatePreviewContent[data-template-id='modern-dark'] {
+  color: #f3f4f6;
+}
+
+.templateItemContainer .templatePreview[data-template-id='ocean-blue'] {
+  background-color: #0ea5e9;
+}
+.templateItemContainer .templatePreviewContent[data-template-id='ocean-blue'] {
+  color: #ffffff;
+}
+
+.templateItemContainer .templatePreview[data-template-id='elegant-red'] {
+  background-color: #dc2626;
+}
+.templateItemContainer .templatePreviewContent[data-template-id='elegant-red'] {
+  color: #ffffff;
+}
+
+.templateItemContainer .templatePreview[data-template-id='nature-green'] {
+  background-color: #059669;
+}
+.templateItemContainer .templatePreviewContent[data-template-id='nature-green'] {
+  color: #ffffff;
+}
+
+.templateItemContainer .templatePreview[data-template-id='pastel-purple'] {
+  background-color: #a78bfa;
+}
+.templateItemContainer .templatePreviewContent[data-template-id='pastel-purple'] {
+  color: #ffffff;
+}
