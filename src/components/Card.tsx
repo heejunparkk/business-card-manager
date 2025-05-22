@@ -32,7 +32,7 @@ const Card: FC<CardProps> = ({ card, onEdit, onDelete }) => {
       } ${document.documentElement.classList.contains('dark') ? styles.cardDarkShadow : ''}`}
     >
       <div
-        className="cursor-pointer p-6"
+        className={styles.cardContent}
         onClick={() => (window.location.href = `/cards/${card.id}`)}
       >
         {card.logo && (
@@ -87,7 +87,7 @@ const Card: FC<CardProps> = ({ card, onEdit, onDelete }) => {
           )}
         </div>
       </div>
-      <div className="bg-opacity-10 dark:bg-opacity-30 flex justify-end space-x-3 bg-black p-3 backdrop-blur-sm">
+      <div className={styles.actionBar}>
         <Link
           href={`/cards/${card.id}`}
           className="flex h-8 w-8 items-center justify-center rounded-full bg-green-50 text-green-600 transition-colors hover:bg-green-100 dark:bg-green-900 dark:text-green-400 dark:hover:bg-green-800"

@@ -2,3 +2,30 @@
 .headerBg {
   background-color: var(--header-bg);
 }
+
+/* 테마 토글 버튼 */
+.themeToggleBtn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 2.25rem;
+  height: 2.25rem;
+  border-radius: 9999px;
+  transition: all 0.3s ease;
+}
+
+.lightModeBtn {
+  background-color: #f3f4f6; /* bg-gray-100 */
+}
+
+.lightModeBtn:hover {
+  background-color: #e5e7eb; /* hover:bg-gray-200 */
+}
+
+.darkModeBtn {
+  background-color: #374151; /* dark:bg-gray-700 */
+}
+
+.darkModeBtn:hover {
+  background-color: #4b5563; /* dark:hover:bg-gray-600 */
+}

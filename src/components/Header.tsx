@@ -30,7 +30,7 @@ const Header = () => {
           <nav className="flex items-center space-x-3">
             <button
               onClick={toggleTheme}
-              className="flex h-9 w-9 items-center justify-center rounded-full bg-gray-100 transition-colors hover:bg-gray-200 dark:bg-gray-700 dark:hover:bg-gray-600"
+              className={`${styles.themeToggleBtn} ${theme === 'dark' ? styles.darkModeBtn : styles.lightModeBtn}`}
               aria-label={theme === 'dark' ? '라이트 모드 전환' : '다크 모드 전환'}
             >
               {theme === 'dark' ? (
