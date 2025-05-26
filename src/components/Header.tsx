@@ -34,9 +34,9 @@ const Header = () => {
               aria-label={theme === 'dark' ? '라이트 모드 전환' : '다크 모드 전환'}
             >
               {theme === 'dark' ? (
-                <FaSun className="text-amber-400" />
-              ) : (
                 <FaMoon className="text-indigo-600" />
+              ) : (
+                <FaSun className="text-amber-400" />
               )}
             </button>
 
