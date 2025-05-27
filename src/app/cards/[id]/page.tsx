@@ -6,7 +6,7 @@ import Image from 'next/image';
 import { BusinessCard, CardFormData } from '@/interfaces/card';
 import { getCardById, deleteCard, updateCard } from '@/lib/cardData';
 import CardForm from '@/components/CardForm';
-import { FaEdit, FaTrash, FaArrowLeft, FaAddressCard } from 'react-icons/fa';
+import { FaArrowLeft, FaAddressCard } from 'react-icons/fa';
 import styles from './cardDetail.module.css';
 import { useTheme } from '@/contexts/ThemeContext';
 
@@ -65,11 +65,30 @@ export default function CardDetail({ params }: Props) {
     setIsEditing(false);
   };
 
+  // 색상의 밝기를 계산하는 함수
+  const isLightColor = (hexColor: string) => {
+    // 기본값은 흰색(밝은 색)
+    if (!hexColor) return true;
+    
+    // HEX 색상에서 RGB 값 추출
+    const hex = hexColor.replace('#', '');
+    const r = parseInt(hex.substr(0, 2), 16);
+    const g = parseInt(hex.substr(2, 2), 16);
+    const b = parseInt(hex.substr(4, 2), 16);
+    
+    // 색상의 밝기 계산 (YIQ 공식 사용)
+    const yiq = ((r * 299) + (g * 587) + (b * 114)) / 1000;
+    
+    // YIQ 값이 128보다 크면 밝은 색, 작으면 어두운 색
+    return yiq >= 128;
+  };
+  
   // 카드 배경색과 텍스트 색상을 CSS 변수로 설정
   useEffect(() => {
     if (card) {
       document.documentElement.style.setProperty('--card-bg', card.backgroundColor || '#ffffff');
       document.documentElement.style.setProperty('--card-text', card.textColor || '#000000');
+      document.documentElement.style.setProperty('--is-light-card', isLightColor(card.backgroundColor || '#ffffff') ? 'true' : 'false');
     }
   }, [card]);
   if (isLoading) {
@@ -141,20 +160,29 @@ export default function CardDetail({ params }: Props) {
                   <h1 className="mb-2 text-4xl font-bold tracking-tight">{card.name}</h1>
                   <p className="text-xl font-light">{card.title}</p>
                 </div>
-                <div className="flex space-x-3">
+                <div className="flex space-x-5">
                   <button
                     onClick={() => setIsEditing(true)}
-                    className="flex h-11 w-11 items-center justify-center rounded-full bg-blue-50 text-blue-600 transition-all hover:-translate-y-1 hover:transform hover:bg-blue-100 hover:shadow-md dark:bg-blue-900/30 dark:text-blue-300 dark:hover:bg-blue-800/40"
+                    className={`${isLightColor(card.backgroundColor || '#ffffff') ? styles.lightBgIcon : styles.darkBgIcon}`}
                     aria-label="명함 편집"
                   >
-                    <FaEdit size={18} />
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="h-5 w-5">
+                      <path d="M17 3a2.85 2.85 0 1 1 4 4L7.5 20.5 2 22l1.5-5.5Z"></path>
+                      <path d="m15 5 4 4"></path>
+                    </svg>
                   </button>
                   <button
                     onClick={handleDelete}
-                    className="flex h-11 w-11 items-center justify-center rounded-full bg-red-50 text-red-600 transition-all hover:-translate-y-1 hover:transform hover:bg-red-100 hover:shadow-md dark:bg-red-900/30 dark:text-red-300 dark:hover:bg-red-800/40"
+                    className={`${isLightColor(card.backgroundColor || '#ffffff') ? styles.lightBgIcon : styles.darkBgIcon}`}
                     aria-label="명함 삭제"
                   >
-                    <FaTrash size={18} />
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="h-5 w-5">
+                      <path d="M3 6h18"></path>
+                      <path d="M19 6v14c0 1-1 2-2 2H7c-1 0-2-1-2-2V6"></path>
+                      <path d="M8 6V4c0-1 1-2 2-2h4c1 0 2 1 2 2v2"></path>
+                      <line x1="10" y1="11" x2="10" y2="17"></line>
+                      <line x1="14" y1="11" x2="14" y2="17"></line>
+                    </svg>
                   </button>
                 </div>
               </div>
