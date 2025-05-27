@@ -129,7 +129,7 @@ export default function Home() {
           </div>
           <button
             onClick={() => router.push('/add')}
-            className="flex w-full items-center justify-center rounded-full bg-gradient-to-r from-blue-600 to-indigo-600 px-6 py-3 font-medium text-white shadow-md transition-all duration-300 hover:from-blue-700 hover:to-indigo-700 hover:shadow-lg sm:w-auto"
+            className="flex w-full cursor-pointer items-center justify-center rounded-full bg-gradient-to-r from-blue-600 to-indigo-600 px-6 py-3 font-medium text-white shadow-md transition-all duration-300 hover:from-blue-700 hover:to-indigo-700 hover:shadow-lg sm:w-auto"
           >
             <FaPlus className="mr-2" /> 새 명함 추가
           </button>
