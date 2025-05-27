@@ -14,7 +14,7 @@ const Header = () => {
     <header
       className={`bg-opacity-90 dark:bg-opacity-90 sticky top-0 z-10 border-b border-gray-100 shadow-md backdrop-blur-md dark:border-gray-700 dark:bg-gray-900 ${styles.headerBg}`}
     >
-      <div className="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
+      <div className="mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex h-16 items-center justify-between">
           <div className="flex items-center">
             <Link href="/" className="group flex items-center">
@@ -34,9 +34,9 @@ const Header = () => {
               aria-label={theme === 'dark' ? '라이트 모드 전환' : '다크 모드 전환'}
             >
               {theme === 'dark' ? (
-                <FaMoon className="text-indigo-600" />
-              ) : (
                 <FaSun className="text-amber-400" />
+              ) : (
+                <FaMoon className="text-indigo-600" />
               )}
             </button>
 
