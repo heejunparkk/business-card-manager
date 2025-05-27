@@ -6,10 +6,12 @@ import CardForm from '@/components/CardForm';
 import { CardFormData } from '@/interfaces/card';
 import { addCard } from '@/lib/cardData';
 import { FaArrowLeft } from 'react-icons/fa';
+import { useTheme } from '@/contexts/ThemeContext';
 
 export default function AddCardPage() {
   const router = useRouter();
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const { theme } = useTheme();
 
   const handleSubmit = (data: CardFormData) => {
     setIsSubmitting(true);
@@ -25,10 +27,13 @@ export default function AddCardPage() {
   return (
     <div className="min-h-screen p-6">
       <div className="mx-auto max-w-4xl">
-        {' '}
         <button
           onClick={() => router.push('/')}
-          className="mb-6 inline-flex items-center rounded-full bg-white px-4 py-2 text-blue-600 shadow-sm transition-all duration-300 hover:text-blue-800 hover:shadow dark:bg-gray-800 dark:text-blue-400 dark:hover:text-blue-300"
+          className={`mb-6 inline-flex items-center rounded-full px-4 py-2 shadow-sm transition-all duration-300 hover:shadow ${
+            theme === 'dark'
+              ? 'bg-gray-800 text-blue-400 hover:text-blue-300'
+              : 'bg-white text-blue-600 hover:text-blue-800'
+          }`}
         >
           <FaArrowLeft className="mr-2" /> 목록으로 돌아가기
         </button>

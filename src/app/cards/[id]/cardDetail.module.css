@@ -2,19 +2,103 @@
 .cardContainer {
   background-color: var(--card-bg, #ffffff);
   color: var(--card-text, #000000);
+  position: relative;
+  overflow: hidden;
+  border-radius: 1rem 1rem 0 0;
+}
+
+.cardContainer::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 100px;
+  height: 100px;
+  background-color: currentColor;
+  opacity: 0.05;
+  border-radius: 0 0 0 100%;
+  z-index: 0;
 }
 
 .cardDarkShadow {
   box-shadow:
-    0 10px 15px -3px var(--shadow-color),
-    0 4px 6px -4px var(--shadow-color);
+    0 10px 25px -5px var(--shadow-color),
+    0 8px 10px -6px var(--shadow-color);
 }
 
 .buttonPrimary {
-  background: var(--button-primary);
-  box-shadow: 0 4px 6px -1px var(--shadow-color);
+  background: var(--button-primary, #3b82f6);
+  box-shadow: 0 4px 10px -2px rgba(59, 130, 246, 0.5);
+  transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+}
+
+.buttonPrimary:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 14px -4px rgba(59, 130, 246, 0.6);
 }
 
 .cardImage {
   object-fit: contain;
+  transition: transform 0.5s ease;
+}
+
+.cardImage:hover {
+  transform: scale(1.05);
+}
+
+.cardSection {
+  position: relative;
+  background-color: rgba(0, 0, 0, 0.05);
+  border-radius: 0.75rem;
+  padding: 1.25rem;
+  transition: all 0.3s ease;
+  backdrop-filter: blur(2px);
+  overflow: hidden;
+}
+
+.cardSection:hover {
+  background-color: rgba(0, 0, 0, 0.07);
+  transform: translateY(-2px);
+}
+
+:global(.dark) .cardSection {
+  background-color: rgba(255, 255, 255, 0.1);
+}
+
+:global(.dark) .cardSection:hover {
+  background-color: rgba(255, 255, 255, 0.12);
+}
+
+.infoIcon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 1.5rem;
+  height: 1.5rem;
+  margin-right: 0.75rem;
+  border-radius: 50%;
+  background-color: currentColor;
+  opacity: 0.1;
+  position: relative;
+  flex-shrink: 0;
+  transition: opacity 0.3s ease;
+}
+
+.infoIcon svg {
+  position: absolute;
+  color: var(--card-text, #000000);
+  width: 0.875rem;
+  height: 0.875rem;
+  opacity: 0.8;
+}
+
+.cardSection:hover .infoIcon {
+  opacity: 0.15;
+}
+
+.infoLabel {
+  font-size: 0.875rem;
+  color: inherit;
+  opacity: 0.6;
+  margin-bottom: 0.25rem;
 }
