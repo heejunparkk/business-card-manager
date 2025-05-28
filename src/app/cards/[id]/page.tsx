@@ -85,12 +85,41 @@ export default function CardDetail({ params }: Props) {
   
   // 카드 배경색과 텍스트 색상을 CSS 변수로 설정
   useEffect(() => {
-    if (card) {
-      document.documentElement.style.setProperty('--card-bg', card.backgroundColor || '#ffffff');
-      document.documentElement.style.setProperty('--card-text', card.textColor || '#000000');
-      document.documentElement.style.setProperty('--is-light-card', isLightColor(card.backgroundColor || '#ffffff') ? 'true' : 'false');
+    // 현재 테마 상태 확인
+    const isDarkMode = document.documentElement.classList.contains('dark');
+    
+    // 테마에 따른 기본 CSS 변수 값 설정
+    let defaultCardBg, defaultCardText;
+    if (isDarkMode) {
+      defaultCardBg = '#1f2937'; // 다크모드 기본 배경색
+      defaultCardText = '#ffffff'; // 다크모드 기본 텍스트색
+    } else {
+      defaultCardBg = '#ffffff'; // 라이트모드 기본 배경색
+      defaultCardText = '#000000'; // 라이트모드 기본 텍스트색
     }
-  }, [card]);
+    
+    if (card) {
+      document.documentElement.style.setProperty('--card-bg', card.backgroundColor || defaultCardBg);
+      document.documentElement.style.setProperty('--card-text', card.textColor || defaultCardText);
+      document.documentElement.style.setProperty('--is-light-card', isLightColor(card.backgroundColor || defaultCardBg) ? 'true' : 'false');
+    }
+    
+    // 컴포넌트 언마운트 시 테마에 맞는 값으로 복원
+    return () => {
+      // 언마운트 시점의 테마 상태 다시 확인
+      const isDarkModeOnUnmount = document.documentElement.classList.contains('dark');
+      
+      if (isDarkModeOnUnmount) {
+        document.documentElement.style.setProperty('--card-bg', '#1f2937');
+        document.documentElement.style.setProperty('--card-text', '#ffffff');
+        document.documentElement.style.setProperty('--is-light-card', 'false');
+      } else {
+        document.documentElement.style.setProperty('--card-bg', '#ffffff');
+        document.documentElement.style.setProperty('--card-text', '#000000');
+        document.documentElement.style.setProperty('--is-light-card', 'true');
+      }
+    };
+  }, [card, theme]);
   if (isLoading) {
     return (
       <div className="flex min-h-screen items-center justify-center">

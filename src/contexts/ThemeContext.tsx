@@ -52,8 +52,16 @@ export function ThemeProvider({ children }: { children: React.ReactNode }) {
       // 확실하게 dark 클래스를 전환
       if (newTheme === 'dark') {
         document.documentElement.classList.add('dark');
+        // 다크모드 CSS 변수 설정
+        document.documentElement.style.setProperty('--card-bg', '#1f2937');
+        document.documentElement.style.setProperty('--card-text', '#ffffff');
+        document.documentElement.style.setProperty('--is-light-card', 'false');
       } else {
         document.documentElement.classList.remove('dark');
+        // 라이트모드 CSS 변수 설정
+        document.documentElement.style.setProperty('--card-bg', '#ffffff');
+        document.documentElement.style.setProperty('--card-text', '#000000');
+        document.documentElement.style.setProperty('--is-light-card', 'true');
       }
 
       // 강제로 DOM을 업데이트하기 위한 방법
