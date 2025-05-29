@@ -2,18 +2,14 @@
 
 import { BusinessCard } from '@/interfaces/card';
 import { FC, useEffect, useRef } from 'react';
-import { FaEdit, FaTrash, FaEye } from 'react-icons/fa';
-import Link from 'next/link';
 import Image from 'next/image';
 import styles from './Card.module.css';
 
 interface CardProps {
   card: BusinessCard;
-  onEdit: (id: string) => void;
-  onDelete: (id: string) => void;
 }
 
-const Card: FC<CardProps> = ({ card, onEdit, onDelete }) => {
+const Card: FC<CardProps> = ({ card }) => {
   const cardRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
@@ -154,36 +150,6 @@ const Card: FC<CardProps> = ({ card, onEdit, onDelete }) => {
             </div>
           )}
         </div>
-      </div>
-
-      <div className={styles.actionBar}>
-        <Link
-          href={`/cards/${card.id}`}
-          className={`${styles.actionButton} flex h-9 w-9 items-center justify-center rounded-full bg-green-50 text-green-600 transition-all hover:bg-green-100 dark:bg-green-900/50 dark:text-green-400 dark:hover:bg-green-800`}
-          aria-label="명함 상세보기"
-        >
-          <FaEye />
-        </Link>
-        <button
-          onClick={(e) => {
-            e.stopPropagation();
-            onEdit(card.id);
-          }}
-          className={`${styles.actionButton} flex h-9 w-9 items-center justify-center rounded-full bg-blue-50 text-blue-600 transition-all hover:bg-blue-100 dark:bg-blue-900/50 dark:text-blue-400 dark:hover:bg-blue-800`}
-          aria-label="명함 편집"
-        >
-          <FaEdit />
-        </button>
-        <button
-          onClick={(e) => {
-            e.stopPropagation();
-            onDelete(card.id);
-          }}
-          className={`${styles.actionButton} flex h-9 w-9 items-center justify-center rounded-full bg-red-50 text-red-600 transition-all hover:bg-red-100 dark:bg-red-900/50 dark:text-red-400 dark:hover:bg-red-800`}
-          aria-label="명함 삭제"
-        >
-          <FaTrash />
-        </button>
       </div>
     </div>
   );
