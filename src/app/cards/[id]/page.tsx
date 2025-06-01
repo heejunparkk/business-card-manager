@@ -69,25 +69,25 @@ export default function CardDetail({ params }: Props) {
   const isLightColor = (hexColor: string) => {
     // 기본값은 흰색(밝은 색)
     if (!hexColor) return true;
-    
+
     // HEX 색상에서 RGB 값 추출
     const hex = hexColor.replace('#', '');
     const r = parseInt(hex.substr(0, 2), 16);
     const g = parseInt(hex.substr(2, 2), 16);
     const b = parseInt(hex.substr(4, 2), 16);
-    
+
     // 색상의 밝기 계산 (YIQ 공식 사용)
-    const yiq = ((r * 299) + (g * 587) + (b * 114)) / 1000;
-    
+    const yiq = (r * 299 + g * 587 + b * 114) / 1000;
+
     // YIQ 값이 128보다 크면 밝은 색, 작으면 어두운 색
     return yiq >= 128;
   };
-  
+
   // 카드 배경색과 텍스트 색상을 CSS 변수로 설정
   useEffect(() => {
     // 현재 테마 상태 확인
     const isDarkMode = document.documentElement.classList.contains('dark');
-    
+
     // 테마에 따른 기본 CSS 변수 값 설정
     let defaultCardBg, defaultCardText;
     if (isDarkMode) {
@@ -97,18 +97,24 @@ export default function CardDetail({ params }: Props) {
       defaultCardBg = '#ffffff'; // 라이트모드 기본 배경색
       defaultCardText = '#000000'; // 라이트모드 기본 텍스트색
     }
-    
+
     if (card) {
-      document.documentElement.style.setProperty('--card-bg', card.backgroundColor || defaultCardBg);
+      document.documentElement.style.setProperty(
+        '--card-bg',
+        card.backgroundColor || defaultCardBg
+      );
       document.documentElement.style.setProperty('--card-text', card.textColor || defaultCardText);
-      document.documentElement.style.setProperty('--is-light-card', isLightColor(card.backgroundColor || defaultCardBg) ? 'true' : 'false');
+      document.documentElement.style.setProperty(
+        '--is-light-card',
+        isLightColor(card.backgroundColor || defaultCardBg) ? 'true' : 'false'
+      );
     }
-    
+
     // 컴포넌트 언마운트 시 테마에 맞는 값으로 복원
     return () => {
       // 언마운트 시점의 테마 상태 다시 확인
       const isDarkModeOnUnmount = document.documentElement.classList.contains('dark');
-      
+
       if (isDarkModeOnUnmount) {
         document.documentElement.style.setProperty('--card-bg', '#1f2937');
         document.documentElement.style.setProperty('--card-text', '#ffffff');
@@ -195,7 +201,16 @@ export default function CardDetail({ params }: Props) {
                     className={`${isLightColor(card.backgroundColor || '#ffffff') ? styles.lightBgIcon : styles.darkBgIcon}`}
                     aria-label="명함 편집"
                   >
-                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="h-5 w-5">
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      stroke="currentColor"
+                      strokeWidth="2"
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      className="h-5 w-5"
+                    >
                       <path d="M17 3a2.85 2.85 0 1 1 4 4L7.5 20.5 2 22l1.5-5.5Z"></path>
                       <path d="m15 5 4 4"></path>
                     </svg>
@@ -205,7 +220,16 @@ export default function CardDetail({ params }: Props) {
                     className={`${isLightColor(card.backgroundColor || '#ffffff') ? styles.lightBgIcon : styles.darkBgIcon}`}
                     aria-label="명함 삭제"
                   >
-                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="h-5 w-5">
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      stroke="currentColor"
+                      strokeWidth="2"
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      className="h-5 w-5"
+                    >
                       <path d="M3 6h18"></path>
                       <path d="M19 6v14c0 1-1 2-2 2H7c-1 0-2-1-2-2V6"></path>
                       <path d="M8 6V4c0-1 1-2 2-2h4c1 0 2 1 2 2v2"></path>
