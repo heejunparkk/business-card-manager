@@ -5,7 +5,7 @@ import { useRouter } from 'next/navigation';
 import Card from '@/components/Card';
 import CardForm from '@/components/CardForm';
 import { BusinessCard, CardFormData } from '@/interfaces/card';
-import { getCards, addCard, updateCard, deleteCard } from '@/lib/cardData';
+import { getCards, addCard, updateCard } from '@/lib/cardData';
 import { FaPlus, FaSearch, FaAddressCard } from 'react-icons/fa';
 import styles from './page.module.css';
 
@@ -87,26 +87,6 @@ export default function Home() {
 
     setIsEditing(false);
     setEditingCard(undefined);
-  };
-
-  // 명함 삭제하기
-  const handleDeleteCard = (id: string) => {
-    if (window.confirm('정말로 이 명함을 삭제하시겠습니까?')) {
-      const success = deleteCard(id);
-
-      if (success) {
-        setCards((prevCards) => prevCards.filter((card) => card.id !== id));
-      }
-    }
-  };
-
-  // 명함 편집 시작
-  const handleEditStart = (id: string) => {
-    const cardToEdit = cards.find((card) => card.id === id);
-    if (cardToEdit) {
-      setEditingCard(cardToEdit);
-      setIsEditing(true);
-    }
   };
 
   return (
@@ -207,7 +187,7 @@ export default function Home() {
         {/* 명함 목록 */}
         <div className="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3">
           {filteredCards.map((card) => (
-            <Card key={card.id} card={card} onEdit={handleEditStart} onDelete={handleDeleteCard} />
+            <Card key={card.id} card={card} />
           ))}
 
           {cards.length === 0 && !showForm && (
