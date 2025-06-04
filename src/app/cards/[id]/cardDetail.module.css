@@ -50,6 +50,7 @@
 .cardSection:hover {
   background-color: rgba(0, 0, 0, 0.07);
   transform: translateY(-2px);
+  box-shadow: 0 4px 12px -2px rgba(0, 0, 0, 0.08);
 }
 
 :global(.dark) .cardSection {
@@ -122,4 +123,57 @@
   color: rgba(255, 255, 255, 1);
   transform: scale(1.15);
   filter: drop-shadow(0 1px 3px rgba(255, 255, 255, 0.3));
+}
+
+/* 네이버 지도 링크 스타일 */
+.naverMapLink {
+  position: relative;
+  transition: all 0.3s ease;
+}
+
+.naverMapLink:hover {
+  color: #03c75a; /* 네이버 브랜드 색상 */
+}
+
+.naverMapLink:after {
+  content: '';
+  position: absolute;
+  width: 100%;
+  height: 1px;
+  bottom: -2px;
+  left: 0;
+  background-color: #03c75a; /* 네이버 브랜드 색상 */
+  transform: scaleX(0);
+  transform-origin: bottom right;
+  transition: transform 0.3s ease;
+}
+
+.naverMapLink:hover:after {
+  transform: scaleX(1);
+  transform-origin: bottom left;
+}
+
+/* 네이버 지도 배지 애니메이션 */
+@keyframes pulse {
+  0%, 100% { transform: scale(1); }
+  50% { transform: scale(1.05); }
+}
+
+.naverMapBadge {
+  display: inline-flex;
+  align-items: center;
+  background-color: #03c75a;
+  color: white;
+  border-radius: 0.375rem;
+  padding: 0.125rem 0.375rem;
+  font-size: 0.75rem;
+  font-weight: 500;
+  margin-left: 0.5rem;
+  transition: all 0.3s ease;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+}
+
+.naverMapLink:hover .naverMapBadge {
+  animation: pulse 1s infinite;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
 }
