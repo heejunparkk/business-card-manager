@@ -155,8 +155,13 @@
 
 /* 네이버 지도 배지 애니메이션 */
 @keyframes pulse {
-  0%, 100% { transform: scale(1); }
-  50% { transform: scale(1.05); }
+  0%,
+  100% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.05);
+  }
 }
 
 .naverMapBadge {
