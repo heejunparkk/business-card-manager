@@ -363,7 +363,7 @@ export default function CardDetail({ params }: Props) {
                           href={card.website}
                           target="_blank"
                           rel="noopener noreferrer"
-                          className="text-blue-600 transition-all hover:text-blue-700 hover:underline dark:text-blue-400 dark:hover:text-blue-300"
+                          className={styles.websiteLink}
                         >
                           {card.website.replace(/(^\w+:|^)\/\//, '')}
                         </a>
