@@ -43,6 +43,7 @@
   border-radius: 0.75rem;
   padding: 1.25rem;
   transition: all 0.3s ease;
+  -webkit-backdrop-filter: blur(2px);
   backdrop-filter: blur(2px);
   overflow: hidden;
 }
@@ -132,7 +133,7 @@
 }
 
 .naverMapLink:hover {
-  color: #03c75a; /* 네이버 브랜드 색상 */
+  color: #3b82f6; /* 링크 호버 색상 */
 }
 
 .naverMapLink:after {
@@ -142,7 +143,7 @@
   height: 1px;
   bottom: -2px;
   left: 0;
-  background-color: #03c75a; /* 네이버 브랜드 색상 */
+  background-color: #3b82f6; /* 링크 호버 색상 */
   transform: scaleX(0);
   transform-origin: bottom right;
   transition: transform 0.3s ease;
@@ -173,7 +174,7 @@
 }
 
 .emailLink:hover {
-  color: #4285f4; /* Gmail 브랜드 색상 */
+  color: #3b82f6; /* 링크 호버 색상 */
 }
 
 .emailLink:after {
@@ -183,7 +184,7 @@
   height: 1px;
   bottom: -2px;
   left: 0;
-  background-color: #4285f4; /* Gmail 브랜드 색상 */
+  background-color: #3b82f6; /* 링크 호버 색상 */
   transform: scaleX(0);
   transform-origin: bottom right;
   transition: transform 0.3s ease;
@@ -200,12 +201,11 @@
   transition: all 0.3s ease;
   display: flex;
   align-items: center;
-  color: white; /* 흰색 글자색 */
 }
 
 .websiteLink:hover {
-  color: #ffffff; /* 호버시에도 흰색 유지 */
-  opacity: 0.9; /* 약간 투명도 조절 */
+  color: #3b82f6; /* 링크 호버 색상 */
+  opacity: 1; /* 투명도 제거 */
 }
 
 .websiteLink:after {
@@ -215,7 +215,7 @@
   height: 1px;
   bottom: -2px;
   left: 0;
-  background-color: #ffffff; /* 흰색 밑줄 */
+  background-color: #3b82f6; /* 링크 호버 색상 */
   transform: scaleX(0);
   transform-origin: bottom right;
   transition: transform 0.3s ease;
